@@ -78,6 +78,10 @@ body {
   0% { transform: translate(-50%,-50%) scale(0.5) rotate(-5deg); opacity: 0; }
   100% { transform: translate(-50%,-50%) scale(1) rotate(0deg); opacity: 1; }
 }
+@keyframes cardPopCenter {
+  0% { transform: scale(0.5) rotate(-5deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
 @keyframes neonFloat {
   0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
   10% { opacity: 0.7; }
@@ -834,7 +838,7 @@ body {
   width: 88%;
   border: 3px solid var(--neon-cyan);
   box-shadow: 0 0 40px var(--neon-blue), 0 0 80px var(--neon-cyan);
-  animation: cardPop 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  animation: cardPopCenter 0.6s cubic-bezier(0.34,1.56,0.64,1);
   backdrop-filter: blur(15px);
 }
 .celebrate-emoji { font-size: 64px; display: block; margin-bottom: 12px; filter: drop-shadow(0 0 15px var(--neon-blue)); }
