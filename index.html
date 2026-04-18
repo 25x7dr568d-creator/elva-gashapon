@@ -896,7 +896,7 @@ body {
 <!-- 頂部 Nav -->
 <div class="top-nav">
   <button class="nav-btn active" id="navHome" onclick="showPage('home')">✨ 扭蛋</button>
-  <div class="progress-count" id="progressCount">已收 0 / 50</div>
+  <div class="progress-count" id="progressCount">已收 0 / 100</div>
   <button class="nav-btn" id="navArchive" onclick="showPage('archive')">🌟 集點卡</button>
 </div>
 
@@ -944,7 +944,7 @@ body {
 <div class="sticker-page" id="archivePage">
   <div class="sticker-header">
     <div class="sticker-header-title"><img class="header-elva" src="assets/elva-avatar.png" alt="Elva">ELVA 集點卡</div>
-    <div class="sticker-total-progress" id="archiveProgress">0 / 50</div>
+    <div class="sticker-total-progress" id="archiveProgress">0 / 100</div>
     <div class="sticker-total-bar"><div class="sticker-total-bar-fill" id="totalBarFill" style="width:0%"></div></div>
     <div class="sticker-hint">💡 每抽一顆就蓋一個章 · 集滿 10 個就是一張！</div>
   </div>
@@ -990,14 +990,14 @@ body {
 
 <script>
 /* ====================================================================
- * 50 條小確幸行動清單（沿用 v1 水豚版內容，v2 沿用）
+ * 100 條小確幸 / 自我關照 / 家人互動行動清單（v1.1 擴增版，2026-04-18）
  * ==================================================================== */
 var ITEMS = [
   { emoji:'🍬', action:'選一個你最愛的零食吃' },
   { emoji:'🥤', action:'喝一杯你最喜歡的飲料' },
   { emoji:'🍎', action:'吃一口家裡最好吃的那道菜' },
   { emoji:'🥛', action:'用你最喜歡的杯子喝水' },
-  { emoji:'🍪', action:'慢慢吃一塊餅乾，嚼 10 次' },
+  { emoji:'🍪', action:'慢慢吃一塊餅乾,嚼 10 次' },
   { emoji:'🎨', action:'畫一張你最愛的卡通角色' },
   { emoji:'🖍️', action:'用彩色筆塗滿一頁' },
   { emoji:'✈️', action:'摺一個紙飛機' },
@@ -1011,13 +1011,14 @@ var ITEMS = [
   { emoji:'✒️', action:'重新排列鉛筆盒' },
   { emoji:'🍀', action:'今天帶一個幸運小物去學校' },
   { emoji:'🎵', action:'聽一首你最愛的歌' },
-  { emoji:'📺', action:'看一集你最愛的卡通' },
+  { emoji:'📺', action:'看一段你最愛的卡通' },
   { emoji:'🎶', action:'跟著歌哼兩句' },
   { emoji:'🎥', action:'重看最愛的那一段短影片' },
   { emoji:'🎧', action:'閉眼聽完一首歌' },
+  { emoji:'▶️', action:'看一支你最愛的 YouTube 短影片' },
+  { emoji:'📱', action:'打開最愛的 YouTube 頻道看一下' },
   { emoji:'🧸', action:'抱你最愛的玩偶 1 分鐘' },
   { emoji:'💬', action:'跟玩偶說今天發生的事' },
-  { emoji:'🎮', action:'玩 10 分鐘你喜歡的遊戲' },
   { emoji:'🐾', action:'摸家裡最軟的東西' },
   { emoji:'🎴', action:'玩你最愛的卡牌或貼紙' },
   { emoji:'🦘', action:'跳繩 10 下' },
@@ -1031,10 +1032,12 @@ var ITEMS = [
   { emoji:'🧹', action:'整理一個小抽屜' },
   { emoji:'✨', action:'把一個小東西排列整齊' },
   { emoji:'😊', action:'給一個同學一個微笑' },
-  { emoji:'😄', action:'跟家人說一件今天好笑的事' },
+  { emoji:'😄', action:'跟媽媽說一件今天好笑的事' },
   { emoji:'🧒', action:'陪弟弟玩 5 分鐘他想玩的' },
-  { emoji:'🙏', action:'跟家人說一次「謝謝」' },
-  { emoji:'🫂', action:'抱一下家裡的人' },
+  { emoji:'🙏', action:'跟爸爸說一次「謝謝」' },
+  { emoji:'🫂', action:'抱一下媽媽' },
+  { emoji:'👨', action:'抱一下爸爸' },
+  { emoji:'👶', action:'給弟弟一個微笑' },
   { emoji:'🌛', action:'睡前抱玩偶入睡' },
   { emoji:'🎶', action:'躺床聽完一首歌再睡' },
   { emoji:'✨', action:'睡前想一件今天開心的事' },
@@ -1042,7 +1045,55 @@ var ITEMS = [
   { emoji:'💭', action:'在本子上寫今天的心情一個字' },
   { emoji:'🖼️', action:'畫一張小圖貼在桌上' },
   { emoji:'📝', action:'寫一張紙條放口袋當秘密' },
-  { emoji:'✍️', action:'今天寫你最愛的字一次' }
+  { emoji:'✍️', action:'今天寫你最愛的字一次' },
+  { emoji:'🪞', action:'對著鏡子說一句「你今天很棒」' },
+  { emoji:'💅', action:'摸摸自己的指甲' },
+  { emoji:'🌸', action:'挑一件你今天覺得最美的衣服' },
+  { emoji:'🎀', action:'在家裡試一個你想要的髮型' },
+  { emoji:'👚', action:'摺好今天的睡衣' },
+  { emoji:'🌿', action:'摸一下家裡的植物' },
+  { emoji:'🌳', action:'看窗外的樹有沒有動' },
+  { emoji:'☁️', action:'找一朵像動物的雲' },
+  { emoji:'🌧️', action:'聽一下外面的聲音 30 秒' },
+  { emoji:'🌞', action:'在陽光下站 1 分鐘' },
+  { emoji:'📖', action:'翻一本最愛的故事書到任何一頁' },
+  { emoji:'🖊️', action:'把今天最喜歡的字寫一次' },
+  { emoji:'📚', action:'整理一下書桌' },
+  { emoji:'🌐', action:'學一個你還不會的小單字' },
+  { emoji:'🎓', action:'教媽媽一件你今天學到的事' },
+  { emoji:'🎤', action:'自己唱一句歌詞' },
+  { emoji:'🥁', action:'用手敲出一個節奏' },
+  { emoji:'🎵', action:'找一首你想學的新歌' },
+  { emoji:'🍽️', action:'自己把碗放進水槽' },
+  { emoji:'👟', action:'把鞋子排整齊' },
+  { emoji:'🪑', action:'推回自己的椅子' },
+  { emoji:'🛏️', action:'自己整理床' },
+  { emoji:'💧', action:'倒一杯水給爸爸或媽媽' },
+  { emoji:'😄', action:'想一件今天最開心的事' },
+  { emoji:'💖', action:'想三個你愛自己的地方' },
+  { emoji:'🌟', action:'找出今天三個小確幸' },
+  { emoji:'🤗', action:'對自己微笑 10 秒' },
+  { emoji:'💪', action:'給自己一個鼓勵' },
+  { emoji:'🤝', action:'幫爸爸或媽媽拿一樣小東西' },
+  { emoji:'🎀', action:'留一張小紙條給家人' },
+  { emoji:'🪀', action:'把弟弟掉的東西撿起來' },
+  { emoji:'🌸', action:'跟阿公阿嬤說「我愛你」' },
+  { emoji:'💌', action:'寫一張小紙條給想念的人' },
+  { emoji:'🎨', action:'用 3 個顏色畫一張小畫' },
+  { emoji:'🧩', action:'找一個你會玩的拼圖' },
+  { emoji:'📦', action:'把一個小盒子變成寶箱' },
+  { emoji:'🌈', action:'把今天看到的顏色寫下來' },
+  { emoji:'🖌️', action:'隨意塗一張紙' },
+  { emoji:'🎯', action:'想三件你想做的事' },
+  { emoji:'🎈', action:'對著天花板許一個小願望' },
+  { emoji:'📸', action:'用眼睛拍一張你想記住的畫面' },
+  { emoji:'💝', action:'想一件你最感謝的事' },
+  { emoji:'🌙', action:'寫一個你的小夢想' },
+  { emoji:'✨', action:'幫自己加油 3 次' },
+  { emoji:'🦋', action:'想像自己變成一隻動物' },
+  { emoji:'💖', action:'抱自己一下' },
+  { emoji:'🌟', action:'跟自己說一次「我超棒!」' },
+  { emoji:'💛', action:'跟媽媽分享你今天最喜歡的一件事' }
 ];
 
 // 球顏色（霓虹紫青粉漸層）
@@ -1103,8 +1154,8 @@ function renderBalls() {
 
 function renderProgress() {
   var count = state.collected.length;
-  document.getElementById('progressCount').textContent = '已收 ' + count + ' / 50';
-  document.getElementById('archiveProgress').textContent = count + ' / 50';
+  document.getElementById('progressCount').textContent = '已收 ' + count + ' / ' + ITEMS.length;
+  document.getElementById('archiveProgress').textContent = count + ' / ' + ITEMS.length;
 }
 
 function renderTodayCard() {
@@ -1161,7 +1212,7 @@ function renderArchive() {
   container.innerHTML = html;
 
   document.getElementById('archiveProgress').textContent = '已集 ' + totalStamps + ' 次 · ' + totalCards + ' 張';
-  var progressPct = Math.min(100, (totalStamps / 50) * 100);
+  var progressPct = Math.min(100, (totalStamps / ITEMS.length) * 100);
   document.getElementById('totalBarFill').style.width = progressPct + '%';
 
   document.getElementById('stickerPagerInfo').textContent = (stickerCurrentPage + 1) + ' / ' + totalCards;
@@ -1193,9 +1244,9 @@ function checkCelebrate() {
     var emoji = document.getElementById('celebrateEmoji');
     var title = document.getElementById('celebrateTitle');
     var sub = document.getElementById('celebrateSub');
-    if (isAllSpeciesDone && cardNum >= 5) {
+    if (isAllSpeciesDone && cardNum >= (ITEMS.length / 10)) {
       emoji.textContent = '🏆';
-      title.textContent = '全部 50 種都集到了！';
+      title.textContent = '全部 ' + ITEMS.length + ' 種都集到了！';
       sub.innerHTML = '你超棒 ✨';
     } else {
       emoji.textContent = '🎉';
