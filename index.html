@@ -1384,7 +1384,7 @@ function showResult(item, mode) {
   } else if (mode === 'detail') {
     badge.textContent = '💖 已收集';
     badge.classList.remove('old');
-    if (retryBtn) retryBtn.style.display = 'none';  // 看詳情不給再轉按鈕（避免誤點）
+    if (retryBtn) retryBtn.style.display = '';  // 保留「再轉一顆」按鈕
   } else {
     badge.textContent = '再次抽到';
     badge.classList.add('old');
