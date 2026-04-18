@@ -680,10 +680,10 @@ body {
   gap: 12px;
 }
 .header-elva {
-  width: 80px;
-  height: 80px;
+  width: 130px;
+  height: 130px;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px var(--neon-purple));
+  filter: drop-shadow(0 0 12px var(--neon-purple));
   animation: wingFlap 3s ease-in-out infinite;
   flex-shrink: 0;
 }
@@ -988,7 +988,7 @@ body {
   <div class="result-label">TODAY · 能量補給</div>
   <div class="result-action" id="resultAction">聽一首你最愛的歌</div>
   <div class="result-badge" id="resultBadge">✨ 新收集！</div>
-  <button class="btn-retry" onclick="retry()">🎰 再轉一顆</button>
+  <button class="btn-retry" id="btnRetry" onclick="retry()">🎰 再轉一顆</button>
   <button class="btn-close" onclick="closeResult()">✕ 關閉</button>
 </div>
 
@@ -1232,7 +1232,7 @@ function changeStickerPage(delta) {
 function showStickerDetail(idx) {
   var item = ITEMS[idx];
   if (!item) return;
-  showResult(item, false);
+  showResult(item, 'detail');
 }
 
 function closeCelebrate() {
@@ -1370,17 +1370,25 @@ function openCapsule() {
   }, 900);
 }
 
-function showResult(item, isNew) {
+function showResult(item, mode) {
+  // mode: true = 新收集（抽到）; false = 再次抽到（抽到重複）; 'detail' = 點集點卡看詳情
   document.getElementById('resultEmoji').innerHTML = '<img src="' + getNotoUrl(item.emoji) + '" alt="">';
   document.getElementById('resultAction').textContent = item.action;
 
   var badge = document.getElementById('resultBadge');
-  if (isNew) {
-    badge.textContent = '✨ 新收集！';
+  var retryBtn = document.getElementById('btnRetry');
+  if (mode === true) {
+    badge.textContent = '✨ 新收集!';
     badge.classList.remove('old');
+    if (retryBtn) retryBtn.style.display = '';
+  } else if (mode === 'detail') {
+    badge.textContent = '💖 已收集';
+    badge.classList.remove('old');
+    if (retryBtn) retryBtn.style.display = 'none';  // 看詳情不給再轉按鈕（避免誤點）
   } else {
     badge.textContent = '再次抽到';
     badge.classList.add('old');
+    if (retryBtn) retryBtn.style.display = '';
   }
 
   document.getElementById('resultCard').classList.add('active');
